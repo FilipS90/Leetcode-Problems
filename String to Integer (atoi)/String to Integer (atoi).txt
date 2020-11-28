@@ -1,0 +1,43 @@
+class Solution {
+    public int myAtoi(String str) {
+        str = str.trim();
+        StringBuilder sb = new StringBuilder();
+        boolean isNegative = false;
+        
+        if(str.length()>=2 && (str.charAt(0) < 48 || str.charAt(0) > 57) && (str.charAt(1) < 48 || str.charAt(1) > 57))
+            return 0;
+        
+        for(int i = 0;i<str.length();i++){
+            if(str.charAt(i) <= 57 && str.charAt(i) >= 48 ){
+                sb.append(Character.toString(str.charAt(i)));
+                continue;
+            }
+            if(sb.length()!=0 && (str.charAt(i) < 48 || str.charAt(i) > 57))
+                break;
+            if(str.charAt(i) != '-' && str.charAt(i) != '+' && sb.length()==0)
+                return 0;
+            if(str.charAt(i)=='-' && sb.length()==0)
+                isNegative=true;
+        }
+        
+        str = sb.toString();
+        
+        if(str.length()==0)
+            return 0;
+        
+        int value = 0;
+        
+        try{
+        if(isNegative)
+            value = Integer.parseInt(str) - 2*Integer.parseInt(str);
+        else
+            value = Integer.parseInt(str);
+        } catch(NumberFormatException e) {
+            if(isNegative)
+                return Integer.MIN_VALUE;
+            return Integer.MAX_VALUE;
+        }
+        
+        return value; 
+    }
+}

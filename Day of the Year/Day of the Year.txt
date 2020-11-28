@@ -1,0 +1,22 @@
+class Solution {
+    public int dayOfYear(String date) {        
+        int [] months = {31,28,31,30,31,30,31,31,30,31,30,31};
+        
+        int year = Integer.parseInt(date.split("-")[0]);
+        int month = Integer.parseInt(date.split("-")[1]);
+        int day = Integer.parseInt(date.split("-")[2]);
+        
+        if(month==1)
+            return day;
+        
+        if ((year % 400 == 0) || (year % 4 == 0) && (year % 100 != 0))
+            months[1]=29;
+        
+        int n = 1,sum=0;
+        
+        for(int i = 0;i<month-1;i++)
+            sum+=months[i];
+        
+        return sum+=day;        
+    }
+}

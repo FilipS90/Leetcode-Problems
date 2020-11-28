@@ -1,0 +1,41 @@
+class Solution {
+    public String frequencySort(String s) {
+        Map<String,Integer> map = new HashMap<String,Integer>();
+        
+        for(int i = 0;i<s.length();i++){
+            char a = s.charAt(i);
+            if(map.containsKey(Character.toString(a))){
+                int val = map.get(Character.toString(a));	// mapping letters to number
+                map.put(Character.toString(a),val+1);		// of repetitions
+            }
+            else
+                map.put(Character.toString(a),1);
+        }
+        Map<Integer,String> inverse = new TreeMap<Integer,String>(Collections.reverseOrder());
+        
+        for(String i : map.keySet()){				//}
+            if(inverse.containsKey(map.get(i))){		
+                StringBuilder sb1 = new StringBuilder();
+                for(int x = 0;x<map.get(i);x++){
+                    sb1.append(i);				
+                }
+                String o = inverse.get(map.get(i));
+                inverse.put(map.get(i), o+sb1.toString());	// reverse mapping
+                continue;					// number of repetitions
+            }							// in reverse order since
+            StringBuilder sb1 = new StringBuilder();		// the one with most reps should be in front
+            for(int a = 0;a<map.get(i);a++) {
+            	sb1.append(i);
+            }
+            inverse.put(map.get(i), sb1.toString());
+            }							//}
+        
+        StringBuilder sb = new StringBuilder();
+        
+        for(int q : inverse.keySet())
+            sb.append(inverse.get(q));
+        
+        return sb.toString();
+        
+    }
+}

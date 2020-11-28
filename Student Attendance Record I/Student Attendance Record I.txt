@@ -1,0 +1,24 @@
+class Solution {
+    public boolean checkRecord(String s) {
+        StringBuilder sb = new StringBuilder(s);
+        int absent = 0, late = 0;
+        
+        for(int i = 0;i<sb.length();i++){
+            char x = sb.charAt(i);
+            if(late==3 || absent==2)
+                return false;
+            if(x=='A'){
+                absent++;
+                late=0;
+                continue;
+            }
+            if(x=='L'){
+                late++;
+                continue;   
+            }
+            late=0;
+        }
+        
+        return late<3 && absent<2;
+    }
+}

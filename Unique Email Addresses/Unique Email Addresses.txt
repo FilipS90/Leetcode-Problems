@@ -1,0 +1,25 @@
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+        Set<String> set = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+        String [] s = new String[2];
+        
+        
+        for(int i = 0;i < emails.length;i++){
+            s = emails[i].split("@");
+            s[0] = s[0].replace(".", "");
+            
+            if(s[0].contains("+"))
+                s[0] = s[0].substring(0, s[0].indexOf("+"));
+            
+            sb.append(s[0]).append("@").append(s[1]);
+            
+            
+            set.add(sb.toString());
+            sb = new StringBuilder();
+        }
+        
+        return set.size();
+        
+    }
+}

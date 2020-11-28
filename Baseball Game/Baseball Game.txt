@@ -1,0 +1,30 @@
+class Solution {
+    public int calPoints(String[] ops) {
+        int points = 0;
+        Deque<Integer> que = new ArrayDeque<>();
+        
+        for(String s: ops){
+        	 if((s.charAt(0)>47 && s.charAt(0)<58) || s.charAt(0)==45){
+            		points+=Integer.parseInt(s);
+            		que.push(Integer.parseInt(s));           
+             }
+            else if(s.charAt(0)=='+'){
+                int q = que.pop();
+                int r=que.peek()+q;
+                points+= r;
+                que.push(q);
+                que.push(r);
+            }
+            else if(s.charAt(0)=='D'){
+                points+=que.peek()+que.peek();
+                que.push(que.peek()+que.peek());
+                }
+            else if(s.charAt(0)=='C'){
+                points-=que.pop();
+            }
+        }
+        
+        return points;
+        
+    }
+}

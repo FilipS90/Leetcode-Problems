@@ -1,0 +1,13 @@
+class Solution {
+    public int arrayPairSum(int[] nums) {
+        int n = nums.length/2, sum = 0, index = 0;
+        Arrays.sort(nums);
+        
+        while(n--!=0){
+            sum+=nums[index];
+            index+=2;
+        }
+        
+        return sum;
+    }
+}

@@ -1,0 +1,13 @@
+class Solution {
+    public String[] findOcurrences(String text, String first, String second) {
+        ArrayList<String> lista = new ArrayList<>();
+        String [] t = text.split(" ");
+        
+        for(int i = 0; i<t.length-2;i++){
+            if(t[i].equals(first) && t[i+1].equals(second))
+                lista.add(t[i+2]);
+        }
+        
+        return lista.toArray(new String[lista.size()]);
+    }
+}

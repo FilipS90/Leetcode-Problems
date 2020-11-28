@@ -1,0 +1,23 @@
+class Solution {
+    public boolean isValid(String s) {
+        ArrayDeque<Character> red = new ArrayDeque<>();
+        
+        for(int i = 0;i<s.length();i++){
+            char x = s.charAt(i);
+            if((x==')' || x=='}' || x==']') && red.isEmpty())
+                return false;                
+            else if(x=='(' || x=='{' || x=='[')
+                red.push(x);
+            else if(x==')' && red.peek()=='(')
+                red.poll();
+            else if(x==']' && red.peek()=='[')
+                red.poll();
+            else if(x=='}' && red.peek()=='{')
+                red.poll();
+            else
+                return false;
+        }
+        return red.isEmpty();
+        
+    }
+}
