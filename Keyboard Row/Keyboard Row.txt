@@ -37,12 +37,10 @@ class Solution {
                 char c = str.charAt(0);
                 if(i == 0)
                     line = letters.get(c);
-                if(line != letters.get(c)){
+                if(line != letters.get(c))
                    continue OUTER;
-                }
-                if(i + 1 == n){
-                    result.add(word);
-                }              
+                if(i + 1 == n)
+                    result.add(word);           
             }
         }
         
