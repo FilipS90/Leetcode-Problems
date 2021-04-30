@@ -1,0 +1,26 @@
+class Solution {
+    public int maxNumberOfBalloons(String text) {
+        int[] cnt = new int[5];
+        
+        for(int i = 0; i<text.length(); i++){
+            char ch = text.charAt(i);
+            
+            if(ch == 'b')
+                cnt[0] = cnt[0] + 1;
+            if(ch == 'a')
+                cnt[1] = cnt[1] + 1;
+            if(ch == 'l')
+                cnt[2] = cnt[2] + 1;
+            if(ch == 'o')
+                cnt[3] = cnt[3] + 1;
+            if(ch == 'n')
+                cnt[4] = cnt[4] + 1;
+        }
+        
+        int once = (int)Math.min(cnt[0], (Math.min(cnt[1], cnt[4])));
+        int twice = (int)Math.min(Math.floor(cnt[2]/2), Math.floor(cnt[3])/2);
+        
+        return Math.min(once, twice);
+        
+    }
+}

@@ -1,0 +1,27 @@
+class Solution {
+    public String[] findWords(String[] words) {
+        HashSet<Character> upper=new HashSet<>(Arrays.asList('q','w','e','r','t','y','u','i','o','p'));
+        HashSet<Character> middle=new HashSet<>(Arrays.asList('a','s','d','f','g','h','j','k','l'));
+        HashSet<Character> lower=new HashSet<>(Arrays.asList('z','x','c','v','b','n','m'));
+        
+        List<String> result = new ArrayList<>();
+        
+        for(String word : words) {
+            char c = Character.toLowerCase(word.charAt(0));
+            
+            if(upper.contains(c) && iterateWord(word, upper) ||
+              middle.contains(c) && iterateWord(word, middle) ||
+              lower.contains(c) && iterateWord(word, lower))
+                result.add(word);
+        }
+        return result.stream().toArray(String[]::new);
+    }
+    
+    private boolean iterateWord(String s, HashSet<Character> set){
+        for(char c : s.toCharArray()){
+            if(!set.contains(Character.toLowerCase(c)))
+                return false;
+        }
+        return true;
+    }
+}
