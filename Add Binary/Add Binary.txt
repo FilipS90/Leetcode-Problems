@@ -1,0 +1,36 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        StringBuffer sb = new StringBuffer();
+        
+        int length1 = a.length() - 1, length2 = b.length() - 1, carryOver = 0;
+        
+        while(true) {
+            int q = length1 >= 0 ? Integer.parseInt(String.valueOf(a.charAt(length1--))) : 0;
+            int x = length2 >= 0 ? Integer.parseInt(String.valueOf(b.charAt(length2--))) : 0;
+            
+            if(q + x + carryOver == 0)
+                sb.append("0");
+            else if (q + x + carryOver == 1){
+                sb.append("1");
+                carryOver = 0;
+            }
+            else if (q + x + carryOver == 2){
+                sb.append("0");
+                carryOver = 1;
+            }
+            else {
+                sb.append("1");
+                carryOver = 1;
+            }
+                
+            if(length1 < 0 && length2 < 0 && carryOver == 0)
+                break;
+            else if (length1 < 0 && length2 < 0 && carryOver == 1) {
+                sb.append("1");
+                break;
+            }
+        }
+        
+        return sb.reverse().toString();
+    }
+}
