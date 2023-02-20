@@ -1,0 +1,17 @@
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if(head == null || head.next == null)
+            return false;
+        
+        Set<ListNode> set = new HashSet<>();
+        ListNode z = head;
+        while(z.next != null){
+            if(set.contains(z))
+                return true;
+            set.add(z);
+            z = z.next;
+        }
+
+        return false;
+    }
+}
