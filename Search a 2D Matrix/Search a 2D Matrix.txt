@@ -1,0 +1,14 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        byte i = (byte)(matrix.length - 1);
+        for(byte y = 0; y < matrix[0].length; y++){
+            if(matrix[i][y] >= target){
+                for(byte q = 0; q < matrix.length; q++){
+                    if(matrix[q][y] == target) return true;
+                    else if(q == matrix.length - 1) break;
+                }
+            }
+        }
+        return false;
+    }
+}

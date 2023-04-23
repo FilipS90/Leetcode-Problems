@@ -1,0 +1,24 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int[][] iterator = new int[matrix.length][matrix[0].length];
+        for(short i = 0; i < matrix.length; i++){
+            for(short y = 0; y < matrix[0].length; y++){
+                iterator[i][y] = matrix[i][y];
+            }
+        }
+
+        for(short i = 0; i < matrix.length; i++){
+            for(short y = 0; y < matrix[0].length; y++){
+                if(iterator[i][y] == 0){
+                    for(short tempI = 0;tempI < matrix.length; tempI++){
+                        matrix[tempI][y] = 0;
+                    }
+
+                    for(short tempY = 0;tempY < matrix[0].length; tempY++){
+                        matrix[i][tempY] = 0;
+                    }
+                }
+            }
+        }
+    }
+}
