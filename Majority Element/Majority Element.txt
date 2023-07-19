@@ -1,0 +1,19 @@
+class Solution {
+    public int majorityElement(int[] nums) {
+        Map<Integer,Integer> count = new HashMap<>();
+
+        for(int q : nums){
+            count.merge(q, 1, Integer::sum);
+        }
+
+        Iterator<Integer> i = count.keySet().iterator();
+
+        while(i.hasNext()){
+            int result = i.next();
+            if(count.get(result) > nums.length / 2)
+                return result;
+        }
+
+        return 0;
+    }
+}
