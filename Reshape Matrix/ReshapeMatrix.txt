@@ -1,0 +1,27 @@
+class Solution {
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        if(mat.length * mat[0].length != r * c)
+            return mat;
+
+        int m = mat.length;
+        int n = mat[0].length;
+        int[][] res = new int[r][c];
+        int[] index = new int[r*c];
+        int indexNum = 0;
+
+        for(int i = 0; i < m; i++){
+            for(int y = 0; y < n; y++){
+                index[indexNum++] = mat[i][y];
+            }
+        }
+        indexNum = 0;
+
+        for(int i = 0; i < r; i++){
+            for(int y = 0; y < c; y++){
+                res[i][y] = index[indexNum++];
+            }
+        }
+
+        return res;
+    }
+}
