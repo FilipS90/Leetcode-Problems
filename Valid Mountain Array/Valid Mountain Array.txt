@@ -1,0 +1,28 @@
+class Solution {
+    public boolean validMountainArray(int[] arr) {
+        int tmp = arr[0], idx = 0;
+        for(int i = 1; i < arr.length; i++){
+            if(tmp == arr[i] || tmp > arr[i] && i == 1)
+                return false;
+
+            if(tmp < arr[i]){
+                tmp = arr[i];
+                continue;
+            }
+            if(tmp > arr[i]){
+                idx = i+1;
+                tmp = arr[i];
+                break;
+            }
+        }
+
+        for(int i = idx; i < arr.length; i++){
+            if(tmp <= arr[i]){
+                return false;
+            }
+            tmp = arr[i];
+        }
+
+        return true;
+    }
+}
