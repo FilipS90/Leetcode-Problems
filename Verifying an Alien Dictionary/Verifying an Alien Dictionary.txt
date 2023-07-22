@@ -1,0 +1,22 @@
+class Solution {
+    public boolean isAlienSorted(String[] words, String order) {
+OUT:    for(byte i = 0; i < words.length - 1; i++){
+            if(words[i].equals(words[i+1]))
+                continue;
+            if(words[i].startsWith(words[i+1])){
+                return false;
+            }
+            for(byte y = 0; y < words[i].length() && y < words[i+1].length(); y++){
+                int idxInAlphabet = order.indexOf(Character.toString(words[i].charAt(y)));
+                int idxInAlphabetNext = order.indexOf(Character.toString(words[i+1].charAt(y)));
+
+                if(idxInAlphabet < idxInAlphabetNext)
+                    continue OUT;
+
+                if(idxInAlphabet > idxInAlphabetNext)
+                    return false;
+            }
+        }
+        return true;
+    }
+}
