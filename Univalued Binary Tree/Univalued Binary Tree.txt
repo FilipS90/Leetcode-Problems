@@ -23,13 +23,6 @@ class Solution {
             return true;
         if(n.val != val)
             return false;
-        if(n.left == null) {
-            return checkValue(n.right, val);
-        }
-        if(n.right == null) {
-            return checkValue(n.left, val);
-        }
-
         return checkValue(n.right, val) && checkValue(n.left, val);
     }
 }
