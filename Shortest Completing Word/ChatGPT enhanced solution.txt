@@ -1,0 +1,38 @@
+class Solution {
+    public String shortestCompletingWord(String licensePlate, String[] words) {
+        int[] licensePlateCounts = new int[26];
+        int remainingChars = 0;
+
+        // Count the characters in the licensePlate
+        for (char c : licensePlate.toLowerCase().toCharArray()) {
+            if (c >= 'a' && c <= 'z') {
+                licensePlateCounts[c - 'a']++;
+                remainingChars++;
+            }
+        }
+
+        String result = "";
+
+        for (String word : words) {
+            int[] wordCounts = new int[26];
+            int wordRemainingChars = remainingChars;
+
+            // Count the characters in the current word
+            for (char c : word.toCharArray()) {
+                if (c >= 'a' && c <= 'z') {
+                    wordCounts[c - 'a']++;
+                    if (wordCounts[c - 'a'] <= licensePlateCounts[c - 'a']) {
+                        wordRemainingChars--;
+                    }
+                }
+            }
+
+            // Check if the current word completes the licensePlate
+            if (wordRemainingChars == 0 && (result.isEmpty() || word.length() < result.length())) {
+                result = word;
+            }
+        }
+
+        return result;
+    }
+}

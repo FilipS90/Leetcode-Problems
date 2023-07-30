@@ -1,0 +1,34 @@
+class Solution {
+    public String shortestCompletingWord(String licensePlate, String[] words) {
+        int shortestWordLength = Integer.MAX_VALUE;
+        String result = "";
+        StringBuilder sb = new StringBuilder();
+        licensePlate = licensePlate.toLowerCase();
+        for(int q = 0; q < licensePlate.length(); q++){
+            char c = licensePlate.charAt(q);
+            if(c >= 97 && c <= 122)
+                sb.append(c);
+        }
+
+        for(String word : words) {
+            StringBuilder tmp = new StringBuilder(sb);
+            for(int i = 0; i < word.length(); i++){
+                char c = word.charAt(i);
+                for(int y = 0; y < licensePlate.length(); y++){
+                    int letterIndex = tmp.indexOf(Character.toString(c));
+                    if(letterIndex < 0){
+                        continue;
+                    } else {
+                        tmp.deleteCharAt(letterIndex);
+                        break;
+                    }
+                }
+            }
+            if(tmp.length() == 0 && shortestWordLength > word.length()){
+                result = word;
+                shortestWordLength = word.length();
+            }
+        }
+        return result;
+    }
+}
