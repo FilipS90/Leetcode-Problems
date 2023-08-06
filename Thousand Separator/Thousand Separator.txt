@@ -1,0 +1,21 @@
+class Solution {
+    public String thousandSeparator(int n) {
+        StringBuilder sb = new StringBuilder();
+        byte counter = 3;
+        while(n != 0) {
+            if(counter == 0){
+                sb.append(".");
+                counter = 2;
+            } else {
+                counter--;
+            }
+            sb.append(n % 10);
+            n /= 10;
+        }
+
+        if(sb.isEmpty())
+            return sb.append("0").toString();
+
+        return sb.reverse().toString();
+    }
+}
