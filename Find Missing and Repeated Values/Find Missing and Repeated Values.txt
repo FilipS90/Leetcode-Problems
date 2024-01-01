@@ -1,0 +1,20 @@
+class Solution {
+    public int[] findMissingAndRepeatedValues(int[][] grid) {
+        int[] checker = new int[grid.length * grid.length + 1];
+        int index = 0;
+        for(int i = 0; i < grid[0].length; i++){
+            for(int y = 0; y < grid.length; y++){
+                checker[grid[i][y]] = checker[grid[i][y]] + 1;
+            }
+        }
+        int [] result = new int[2];
+        for(int i = 0; i < checker.length; i++){
+            if(checker[i] == 2){
+                result[0] = i;
+            } else if (checker[i] == 0){
+                result[1] = i;
+            }
+        }
+        return result;
+    }
+}
