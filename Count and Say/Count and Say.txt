@@ -1,0 +1,38 @@
+class Solution {
+    public String countAndSay(int n) {
+        if(n == 1)
+            return "1";
+
+        if(n == 2)
+            return "11";
+
+        return countAndSayRec("11", n - 2);
+    }
+
+    public String countAndSayRec(String s, int count) {
+        StringBuilder sb = new StringBuilder();
+        int n = 1;
+        for(int i = 0; i < s.length() - 1; i++) {
+            char c = s.charAt(i);
+            if(c != s.charAt(i + 1)){
+                sb.append(n + String.valueOf(c));
+                n = 1;
+                if(i == s.length() - 2){
+                    sb.append(1 + String.valueOf(s.charAt(s.length() - 1)));
+                }
+            } else if (c == s.charAt(i + 1)) {
+                n++;
+                if(i == s.length() - 2){
+                    sb.append(n + String.valueOf(c));
+                    n = 1;
+                }
+            }
+        }
+
+        if(count == 1)
+            return sb.toString();
+
+        return countAndSayRec(sb.toString(), --count);
+    }
+
+}
