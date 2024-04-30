@@ -1,0 +1,28 @@
+class Solution {
+    public void reorderList(ListNode head) {
+        List<Integer> l = new ArrayList<>();
+        ListNode n = head.next;
+
+        while(n != null) {
+            l.add(n.val);
+            n = n.next;
+        }
+
+        n = head;
+        boolean isFirst = true;
+
+        while(l.size() > 0) {
+            int num = 0;
+            if(isFirst){
+                num = l.get(l.size() - 1);
+                l.remove(l.size() - 1);
+            } else {
+                num = l.get(0);
+                l.remove(0);
+            }
+            isFirst = !isFirst;
+            n.next = new ListNode(num);
+            n = n.next;
+        }
+    }
+}
