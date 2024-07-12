@@ -1,0 +1,17 @@
+class Solution {
+    public int findLucky(int[] arr) {
+        int luckyNum = -1;
+        int[] luckyArr = new int[501];
+
+        for(int i : arr)
+            luckyArr[i]++;
+
+        for(int i = luckyArr.length - 1; i >= 1; i--)
+            if(i == luckyArr[i]){
+                luckyNum = i;
+                break;
+            }
+
+        return luckyNum;
+    }
+}
