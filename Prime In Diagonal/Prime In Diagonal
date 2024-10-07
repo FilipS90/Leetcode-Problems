@@ -1,0 +1,39 @@
+class Solution {
+    public int diagonalPrime(int[][] nums) {
+        int maxPrime = 0;
+        int yAsc = nums.length - 1, yDesc = 0;
+        Map<Integer, Boolean> m = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            int a = nums[i][yDesc++];
+            int b = nums[i][yAsc--];
+
+            if(!m.containsKey(a) && isPrime(a, m) && a > maxPrime)
+                maxPrime = a;
+            if(!m.containsKey(b) && isPrime(b, m) && b > maxPrime)
+                maxPrime = b;
+        }
+
+        return maxPrime;
+    }
+
+    public boolean isPrime(int n, Map<Integer, Boolean> memory) {
+        if(n == 2 || n == 3) {
+            memory.put(n, true);
+            return true;
+        }
+
+        if(n % 2 == 0 || n == 1) {
+            memory.put(n, false);
+            return false;
+        }
+
+        for(int i = 3; i <= Math.sqrt(n); i+=2) {
+            if(n % i == 0){
+                memory.put(n, false);
+                return false;
+            }
+        }
+        memory.put(n, true);
+        return true;
+    }
+}
