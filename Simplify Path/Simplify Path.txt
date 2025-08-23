@@ -1,0 +1,34 @@
+class Solution {
+    public String simplifyPath(String path) {
+        StringBuilder sb = new StringBuilder();
+
+        String[] values = path.split("/");
+        byte idx = -1;
+        boolean [] skips = new boolean[values.length];
+
+        for(int i = values.length - 1; i >= 0; i--) {
+            if(values[i].isEmpty() || values[i].equals(".")){
+                continue;
+            }
+
+            if(values[i].equals("..")){
+                skips[++idx] = true;
+                continue;
+            }
+
+            if(idx > -1) {
+                skips[idx--] = false;
+                continue;
+            }
+
+            sb.insert(0, "/" + values[i]);
+        }
+
+        if(sb.toString().isEmpty()){
+            return "/";
+        }
+
+        return sb.toString();
+        
+    }
+}
