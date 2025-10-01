@@ -1,36 +1,22 @@
 class LRUCache {
-    private int capacity;
-    private Map<Integer,Integer> Cache;
-    private ArrayDeque<Integer> deque;
-    
+
+    private final Map<Integer, Integer> m;
+
     public LRUCache(int capacity) {
-        Cache = new HashMap<>(capacity);
-        deque = new ArrayDeque<>();
-        this.capacity = capacity;   
+        m = new LinkedHashMap<>(capacity, Integer.MAX_VALUE, true) {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+            return size() > capacity; // Remove if capacity is exceeded
+        }
+    };
     }
     
     public int get(int key) {
-        if(Cache.get(key)==null)
-            return -1;
-        
-        if(deque.contains(key))
-            deque.remove(key);
-        
-        deque.push(key);
-        
-        return Cache.get(key);
+        return m.getOrDefault(key, -1);
     }
     
     public void put(int key, int value) {
-        if(Cache.size() == capacity && !Cache.containsKey(key))
-            Cache.remove(deque.removeLast());
-                 
-        Cache.put(key,value);
-        
-        if(deque.contains(key))
-            deque.remove(key);
-        
-        deque.push(key);
+        m.put(key, value);
     }
 }
 
