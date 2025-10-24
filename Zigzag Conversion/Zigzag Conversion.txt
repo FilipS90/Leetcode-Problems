@@ -1,0 +1,47 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        if(numRows == 1)
+            return s;
+
+        int i = 0, y = 0;
+        boolean descending = true;
+
+        StringBuilder[] sbs = new StringBuilder[numRows];
+
+        for(int g = 0; g < sbs.length; g++) {
+            sbs[g] = new StringBuilder();
+        }
+
+        for(char c : s.toCharArray()) {
+            sbs[i].append(c);
+
+            if(i == numRows - 1 && descending) {
+                i--;
+                descending = false;
+                continue;
+            }
+
+            if(i == 0 && !descending) {
+                i++;
+                descending = true;
+                continue;
+            }
+
+            if(descending){
+                i++;
+            }
+
+            if(!descending){
+                i--;
+            }
+        }
+        
+        StringBuilder result = new StringBuilder();
+
+        for(StringBuilder z : sbs) {
+            result.append(z.toString());
+        }
+
+        return result.toString();
+    }
+}
