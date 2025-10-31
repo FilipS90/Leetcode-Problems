@@ -1,43 +1,26 @@
 class Solution {
     public String reverseWords(String s) {
         s = s.trim();
-        
-        if(s.isBlank())
-            return "";
-        
-        if(s.length()==1)
-            return s;
-        
         StringBuilder sb = new StringBuilder();
-        int start = 0, end = 0;
-        boolean check = false, space = false;
+        int wordStart = 0;
+        boolean isWord = false;
         
-        for(int i = s.length()-1;i>=0;i--){
-            if((i==0 || s.charAt(i)==' ') && check==true){
-                if(s.charAt(i)==' ')
-                    space=true;
-                if(i!=0){
-                    sb.append(s.substring(i+1, end));
-                    sb.append(" ");
-                }
-                else{
-                    if(!space)
-                        break;
-                    sb.append(s.substring(i, s.indexOf(' ')));
-                }
-                check=false;
-                continue;
+        for(int i = s.length() - 1; i >= 0; i--) {
+            char c = s.charAt(i);
+
+            if(c != ' ' && !isWord) {
+                isWord = true;
+                wordStart = i;
             }
-            else if(check==false && s.charAt(i)!=' '){
-                end = i+1;
-                check = true;
-                if(i==0)
-                    sb.append(s.substring(i, s.indexOf(' ')));
+
+            if(c == ' ' && isWord) {
+                sb.append(s, i + 1, wordStart + 1).append(" ");
+                isWord = false;
+            } else if(i == 0) {
+                sb.append(s, i, wordStart + 1);
             }
         }
-        if(space==false)
-            return s;
-        
+
         return sb.toString();
     }
 }
