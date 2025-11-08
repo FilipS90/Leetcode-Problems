@@ -1,0 +1,42 @@
+class Solution {
+    public int jump(int[] nums) {
+        int jumps = 0;
+        int n = nums.length;
+
+        for(int i = 0; i < n; i++) {
+            if(i == n - 1){
+                break;
+            }
+
+            int possibleJumps = nums[i];
+
+            int greatest = -1;
+            for(int y = 0; y < possibleJumps; y++) {
+                if(i == n - 1){
+                    break;
+                }
+
+                i++;
+
+                if(nums[i] >= greatest){
+                    greatest = nums[i];
+                } else {
+                    greatest--;
+                }
+            }
+            jumps++;
+
+            if(i == n - 1){
+                break;
+            }
+
+            if(greatest != 0){
+                nums[i] = greatest;
+            }
+
+            i--;
+        }
+
+        return jumps;
+    }
+}
