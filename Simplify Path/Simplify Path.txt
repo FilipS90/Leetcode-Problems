@@ -4,7 +4,6 @@ class Solution {
 
         String[] values = path.split("/");
         byte idx = -1;
-        boolean [] skips = new boolean[values.length];
 
         for(int i = values.length - 1; i >= 0; i--) {
             if(values[i].isEmpty() || values[i].equals(".")){
@@ -12,12 +11,12 @@ class Solution {
             }
 
             if(values[i].equals("..")){
-                skips[++idx] = true;
+                ++idx;
                 continue;
             }
 
             if(idx > -1) {
-                skips[idx--] = false;
+                idx--;
                 continue;
             }
 

@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isPathCrossing(String path) {
+        int x = 0, y = 0;
+        Set<String> memo = new HashSet();
+        memo.add(x + "-" + y);
+
+        for(char c : path.toCharArray()) {
+            if(c == 'N') {
+                y++;
+            } else if(c == 'S'){
+                y--;
+            } else if(c == 'E'){
+                x++;
+            } else {
+                x--;
+            }
+            
+            String s = x + "-" + y;
+            
+            if(memo.contains(s)){
+                return true;
+            }
+
+            memo.add(s);
+        }
+
+        return false;
+    }
+}
