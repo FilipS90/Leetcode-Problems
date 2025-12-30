@@ -1,0 +1,43 @@
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+        List<Integer> l = new ArrayList();
+
+        for(int i = 0; i < asteroids.length; i++) {
+            int a = asteroids[i];
+            
+            if(l.size() == 0){
+                l.add(a);
+                continue;
+            }
+
+            int b = l.get(l.size() - 1);
+
+            if(a < 0 && b > 0) {
+                while(true) {
+                    if(l.size() == 0) {
+                        l.add(a);
+                        break;
+                    }
+
+                    b = l.get(l.size() - 1);
+                    if(a < 0 && b < 0){
+                        l.add(a);
+                        break;
+                    } else if(b == Math.abs(a)){
+                        l.remove(l.size() - 1);
+                        break;
+                    }
+                    else if(b < Math.abs(a)){
+                        l.remove(l.size() - 1);
+                    } else {
+                        break;
+                    }
+                }
+            } else {
+                l.add(a);
+            }
+        }
+
+        return l.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
