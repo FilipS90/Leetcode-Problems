@@ -1,0 +1,27 @@
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null)
+            return head;
+
+        List<ListNode> nodes = new ArrayList();
+        ListNode tmp = head;
+        
+        while(tmp != null) {
+            nodes.add(tmp);
+            tmp = tmp.next;
+        }
+
+        int size = nodes.size();
+
+        k %= size;
+
+        if(size == 1 || k == 0)
+            return head;
+
+        ListNode newTail = nodes.get(size - k - 1);
+        newTail.next = null;
+        nodes.get(size - 1).next = head;
+
+        return nodes.get(size - k);
+    }
+}
