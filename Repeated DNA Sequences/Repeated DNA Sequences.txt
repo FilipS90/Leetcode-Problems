@@ -1,0 +1,21 @@
+class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+        if(s.length() < 10) {
+            return new ArrayList();
+        }
+
+        Set<String> seen = new HashSet();
+        Set<String> repeated = new HashSet();
+
+        for(int left = 0, right = 10; right <= s.length(); right++, left++) {
+            String sequence = s.substring(left, right);
+            if(seen.contains(sequence)){
+                repeated.add(sequence);
+            } else {
+                seen.add(sequence);
+            }
+        }
+
+        return repeated.stream().toList();
+    }
+}
