@@ -1,0 +1,29 @@
+class Solution {
+    public int compareVersion(String version1, String version2) {
+        String[] revisions1 = version1.split("\\.");
+        String[] revisions2 = version2.split("\\.");
+        int idx = 0;
+
+        while(true) {
+            if(idx >= revisions1.length && idx >= revisions2.length){
+                break;
+            }
+
+            String revision1 = idx <= revisions1.length - 1 ? revisions1[idx] : "0";
+            String revision2 = idx <= revisions2.length - 1 ? revisions2[idx] : "0";
+            
+            int rev1 = Integer.valueOf(revision1);
+            int rev2 = Integer.valueOf(revision2);
+
+            if(rev1 > rev2){
+                return 1;
+            } else if (rev2 > rev1) {
+                return -1;
+            }
+
+            idx++;
+        }
+
+        return 0;
+    }
+}
