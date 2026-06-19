@@ -1,38 +1,46 @@
 class Solution {
     public String countAndSay(int n) {
-        if(n == 1)
+        if(n == 1) {
             return "1";
+        }
 
-        if(n == 2)
+        if(n == 2) {
             return "11";
+        }
 
-        return countAndSayRec("11", n - 2);
+        return countAndSay(n - 2, "11");
     }
 
-    public String countAndSayRec(String s, int count) {
+    public String countAndSay(int n, String s) {
+        if(n == 0){
+            return s;
+        }
+
         StringBuilder sb = new StringBuilder();
-        int n = 1;
+        int count = 1;
         for(int i = 0; i < s.length() - 1; i++) {
-            char c = s.charAt(i);
-            if(c != s.charAt(i + 1)){
-                sb.append(n + String.valueOf(c));
-                n = 1;
+            char curr = s.charAt(i);
+            char next = s.charAt(i + 1);
+
+            if(curr == next) {
+                count++;
+
                 if(i == s.length() - 2){
-                    sb.append(1 + String.valueOf(s.charAt(s.length() - 1)));
+                    sb.append(count).append(curr);
                 }
-            } else if (c == s.charAt(i + 1)) {
-                n++;
-                if(i == s.length() - 2){
-                    sb.append(n + String.valueOf(c));
-                    n = 1;
+                continue;
+            } 
+
+            if(curr != next) {
+                sb.append(count).append(curr);
+                count = 1;
+
+                if(i == s.length() - 2) {
+                    sb.append(count).append(next);
                 }
             }
         }
 
-        if(count == 1)
-            return sb.toString();
-
-        return countAndSayRec(sb.toString(), --count);
+        return countAndSay(n - 1, sb.toString());
     }
-
 }
