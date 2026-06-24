@@ -1,0 +1,44 @@
+class Solution {
+    public boolean search(int[] nums, int target) {
+        if(nums.length == 1) {
+            return nums[0] == target ? true : false;
+        }
+
+        int left = nums[0], len = nums.length;
+        int mid = len % 2 == 0 ? len / 2 : len / 2 + 1;
+        int midVal = nums[mid];
+        int right = nums[len - 1];
+
+        
+        if(target >= midVal && target <= right) {
+            for(int i = mid; i < len; i++) {
+                if(nums[i] > target){
+                    return false;
+                }
+
+                if(nums[i] == target){
+                    return true;
+                }
+            }
+        }
+
+        if(target >= midVal && target >= left) {
+            for(int i = 0; i < mid; i++) {
+                if(nums[i] > target){
+                    return false;
+                }
+
+                if(nums[i] == target){
+                    return true;
+                }
+            }
+        }
+
+        for(int i = 0; i < len; i++) {
+            if(nums[i] == target)
+                return true;
+        }
+
+        return false;
+    }
+}
