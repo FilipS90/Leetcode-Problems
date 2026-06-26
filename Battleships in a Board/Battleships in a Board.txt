@@ -3,7 +3,7 @@ class Solution {
         int shipCount = 0;
         boolean[][] visited = new boolean[board.length][board[0].length];
 
-        for(int y = 0; y < board.length; y++) {
+        for(short y = 0; y < board.length; y++) {
             for(short x = 0; x < board[0].length; x++) {
                 if(board[y][x] == 'X' && visited[y][x] == false) {
                     shipCount++;
